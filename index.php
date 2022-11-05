@@ -28,13 +28,10 @@
     if ($_GET['timezone'] === 'ET') {
         date_default_timezone_set('America/New_York');
 
-        $dateSunsetTimeUTC = new DateTime();
-        $dateSunsetTimeUTC->setTimestamp($sunsetTime);
-        $dateSunsetTimeUTC->setTimezone(new DateTimeZone('America/New_York'));
-        $dateSunsetTimeET = new DateTime($dateSunsetTimeUTC->format('Y-m-d H:i'));
-
         echo json_encode([
-            'results' => $dateSunsetTimeET,
+            'results' => [
+                'date' => date(DATE_ISO8601, $sunsetTime)
+            ],
             'timestamp' => $sunsetTime,
             'status' => 'OK'
         ]);
